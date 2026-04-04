@@ -1,14 +1,15 @@
+require("nvim-treesitter").install({
+  "lua",
+  "html",
+  "css",
+  "javascript",
+  "typescript",
+  "tsx",
+  "astro"
+})
+
 require("nvim-treesitter").setup({
-  ensure_installed = {
-    "lua",
-    "html",
-    "css",
-    "javascript",
-    "typescript",
-    "tsx",
-    "astro"
-  },
-  highlight = { enable = true},
+  highlight = { enable = true },
   indent = { enable = true }
 })
 
@@ -18,6 +19,6 @@ require("nvim-ts-autotag").setup({
 })
 
 vim.schedule(function()
-    vim.cmd("TSUpdate")
-  end
+  vim.cmd("TSUpdate")
+end
 )
