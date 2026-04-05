@@ -8,11 +8,6 @@ require("nvim-treesitter").install({
   "astro"
 })
 
-require("nvim-treesitter").setup({
-  highlight = { enable = true },
-  indent = { enable = true }
-})
-
 require("nvim-ts-autotag").setup({
   enable_close = true,
   enable_rename = true

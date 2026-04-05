@@ -9,6 +9,11 @@ map("n", "<C-h>", "<C-w>h", {
 map("n", "<C-l>", "<C-w>l", {
   desc = "switch window right"
 })
+map("n", "<C-j>", "<C-w>j", {
+  desc = "switch window down" })
+map("n", "<C-k>", "<C-w>k", {
+  desc = "switch window up"
+})
 
 --nvim tree
 map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", {
@@ -37,3 +42,12 @@ map("n", "<leader>i", vim.diagnostic.open_float, {
 map("n", "gd", vim.lsp.buf.definition, {
   desc = "go to definition"
 })
+
+-- toggleterm
+map("n", "<leader>h", "<cmd>ToggleTerm direction=horizontal<CR>", {
+  desc = "Togge terminal horizontal"
+})
+
+map("t", "<C-x>", function()
+  vim.cmd("stopinsert")
+end)

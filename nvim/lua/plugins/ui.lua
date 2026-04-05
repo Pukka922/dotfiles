@@ -48,3 +48,9 @@ require("nvim-tree").setup({
 });
 
 require('lualine').setup({})
+
+require("toggleterm").setup({
+  direction = "horizonatal",
+  size = 15,
+  open_mapping = nil
+})
