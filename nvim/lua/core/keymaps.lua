@@ -1,5 +1,6 @@
 local map = vim.keymap.set
 
+
 vim.g.mapleader = " "
 
 -- navigation
@@ -33,19 +34,32 @@ map("n", "<S-tab>", ":bprevious<CR>", {
 
 map("n", "<leader>x", function()
   local current = vim.api.nvim_get_current_buf()
-  local buffers = vim.fn.getbufinfo({ buflisted = 1 })
 
-  local ok, err = pcall(vim.cmd, "bd" .. current)
-  if not ok then
-    error(err)
+  if vim.bo[current].modified then
+    error("Buffer has unsaved changes")
     return
   end
 
-  if #buffers > 1 then
+
+  local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+  local next_buf = nil
+
+  for _, buf in ipairs(buffers) do
+    if buf.bufnr ~= current and vim.bo[buf.bufnr].buftype == "" then
+      next_buf = buf.bufnr
+      break
+    end
+  end
+
+
+  if next_buf then
     vim.cmd("bprevious")
   else
     vim.cmd("NvimTreeFocus")
   end
+
+
+  vim.cmd("bd " .. current)
 end, {
   desc = "buff close"
 })
