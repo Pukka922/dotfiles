@@ -30,9 +30,26 @@ map("n", "<tab>", ":bnext<CR>", {
 map("n", "<S-tab>", ":bprevious<CR>", {
   desc = "buff goto prev"
 })
-map("n", "<leader>x", ":bd<CR>", {
+
+map("n", "<leader>x", function()
+  local current = vim.api.nvim_get_current_buf()
+  local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+
+  local ok, err = pcall(vim.cmd, "bd" .. current)
+  if not ok then
+    error(err)
+    return
+  end
+
+  if #buffers > 1 then
+    vim.cmd("bprevious")
+  else
+    vim.cmd("NvimTreeFocus")
+  end
+end, {
   desc = "buff close"
 })
+
 
 -- lsp
 map("n", "<leader>i", vim.diagnostic.open_float, {
