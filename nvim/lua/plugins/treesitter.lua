@@ -5,7 +5,8 @@ require("nvim-treesitter").install({
   "javascript",
   "typescript",
   "tsx",
-  "astro"
+  "astro",
+  "rust"
 })
 
 require("nvim-ts-autotag").setup({

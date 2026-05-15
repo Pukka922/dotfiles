@@ -4,9 +4,23 @@ local lsp_servers = {
   ts_ls = {},
   astro = {},
   gopls = {
-    cmd = { "gopls" },
-    filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    --cmd = { "gopls" },
+    --filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    settings = {
+      gopls = {
+        vulncheck = "Imports",
+        hints = {
+          assignVariableTypes = true,
+        },
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+        gofumpt = true,
+      },
+    },
   },
+  rust_analyzer = {}
 }
 
 
@@ -18,7 +32,8 @@ require("mason-lspconfig").setup({
     "gopls",
     "lua_ls",
     "ts_ls",
-    "astro"
+    "astro",
+    "rust_analyzer"
   }
 })
 
@@ -40,4 +55,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
       end
     end
   end,
+})
+
+vim.diagnostic.config({
+  virtual_text = true,
 })
